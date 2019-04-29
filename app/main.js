@@ -9,7 +9,7 @@ require(["knockout", "navigation"], function (ko, navigation) {
     var knockoutApp = document.getElementById('knockout-app');
     var rootModel = {
         navigate: function(path){
-            navigation.navigate(path);
+            return navigation.navigate(path);
         }
     };
 
