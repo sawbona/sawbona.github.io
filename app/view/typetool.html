@@ -8,7 +8,9 @@
     </p>
     <div class="row">
         <div class="col">
-            <textarea rows="20" class="form-control" data-bind="value: target()"></textarea>
+            <textarea rows="20" class="form-control"
+                placeholder="Paste some content here..."
+                data-bind="textInput: target"></textarea>
             <p>
                 Lenght: <span data-bind="text: target().length"></span> characters.
             </p>
