@@ -1,0 +1,25 @@
+<div>
+    <h1>Typetool</h1>
+    <h2>
+        Use this tool to improve your typing skills.
+    </h2>
+    <p>
+        Copy the content on the left side of the screen and type it in the right side component. <em>Check your stats and beat yourself!</em>
+    </p>
+    <div class="row">
+        <div class="col">
+            <textarea rows="20" class="form-control" data-bind="value: target()"></textarea>
+            <p>
+                Lenght: <span data-bind="text: target().length"></span> characters.
+            </p>
+        </div>
+        <div class="col">
+            <textarea 
+                data-bind="textInput: input"
+            rows="20" class="form-control" placeholder="Type in here..."></textarea>
+            <p>
+                Correct: <span data-bind="text: correctCount()"></span> of <span data-bind="text: input().length"></span> characters.
+            </p>
+        </div>
+    </div>
+</div>
