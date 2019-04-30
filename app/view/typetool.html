@@ -1,27 +1,43 @@
 <div>
     <h1>Typetool</h1>
     <h2>
-        Use this tool to improve your typing skills.
+        Use this tool to improve your memory and your typing skills.
     </h2>
     <p>
-        Copy the content on the left side of the screen and type it in the right side component. <em>Check your stats and beat yourself!</em>
+        Whenever you start typing in the right side the left side will be hidden. If you want to show it again just
+        click in the Show Left Panel button.
     </p>
     <div class="row">
         <div class="col">
-            <textarea rows="20" class="form-control"
-                placeholder="Paste some content here..."
-                data-bind="textInput: target"></textarea>
+            <button data-bind="click: showLeftPanel" type="button" class="btn btn-secondary">Show Left Panel</button>
+        </div>
+        <div class="col">
+            <button data-bind="click: clearInput" type="button" class="btn btn-secondary">Clear</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <textarea wrap="off" rows="20" class="form-control" placeholder="Paste some content here..."
+                data-bind="textInput: target, css: {'j-hidden': !showTargetInput()}"></textarea>
             <p>
                 Lenght: <span data-bind="text: target().length"></span> characters.
             </p>
         </div>
         <div class="col">
-            <textarea 
-                data-bind="textInput: input"
-            rows="20" class="form-control" placeholder="Type in here..."></textarea>
+            <textarea wrap="off" autofocus="autofocus" id="typein" data-bind="textInput: input" rows="20"
+                class="form-control" placeholder="Type in here..."></textarea>
             <p>
-                Correct: <span data-bind="text: correctCount()"></span> of <span data-bind="text: input().length"></span> characters.
+                Correct: <span data-bind="text: correctCount()"></span> of <span
+                    data-bind="text: input().length"></span> characters.
+                <i data-bind="visible: isInputCorrect()" class="fa fa-check" style="color: green"></i>
             </p>
         </div>
     </div>
+    <p class="text-info">
+        * Copy the content on the left side of the screen and type it in the right side component. <em>Check your stats
+            and beat yourself!</em>
+    </p>
+    <p class="text-info">
+        * Clear the left side panel and refresh the page to get the initial text back.
+    </p>
 </div>

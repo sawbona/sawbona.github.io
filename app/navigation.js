@@ -28,16 +28,19 @@ define(["knockout"], function (ko) {
             }
             var prefix = "./";
             var template = getTemplate(prefix + "view/" + path + ".html");
-            template.then(function (template) {
+            template.then(function (templateContent) {
+                var node = document.createElement("div");
+                node.innerHTML = templateContent;
+                var appContent = document.getElementById("navigation-content");
+                while (appContent.hasChildNodes()) {
+                    appContent.removeChild(appContent.firstChild);
+                }
+                appContent.appendChild(node);
                 require([prefix + "viewModel/" + path], function (model) {
-                    var node = document.createElement("div");
-                    node.innerHTML = template;
-                    var appContent = document.getElementById("navigation-content");
-                    while (appContent.hasChildNodes()) {
-                        appContent.removeChild(appContent.firstChild);
-                    }
-                    appContent.appendChild(node);
                     ko.applyBindings(model, node);
+                    if(model.afterApplyBidings){
+                        model.afterApplyBidings();
+                    }
                 });
             });
         }
