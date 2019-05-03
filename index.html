@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="./app/main.css">
-    <title>Jacob Lobaco - Home Page</title>
+    <title>Jacob Lobaco</title>
 </head>
 
 <body>
@@ -40,8 +40,13 @@
                         return navigate('typetool');
                     }">Typetool</a>
                 </nav>
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="#visualizations/01" data-bind="click: function(){
+                            return navigate('visualizations/01');
+                        }">Visualizations 01</a>
+                </nav>
             </div>
-            <div class="col-sm-6" id="navigation-content">
+            <div class="col-sm-6" data-bind="component: viewName">
             </div>
             <div class="col-sm-3">
             </div>

@@ -16,7 +16,7 @@ define([], function () {
                 xhttp.send();
             });
         }
-        self.getResource = function (resourceName) {
+        self.getText = function (resourceName) {
             return getTemplate('resources/' + resourceName);
         };
     }

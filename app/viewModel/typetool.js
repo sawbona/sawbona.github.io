@@ -9,7 +9,7 @@ define(["knockout", "resource"], function (ko, resource) {
         }
         self.target = ko.observable(target);
         if (target == null || target.length == 0) {
-            resource.getResource('initialText.txt').then(function (initialText) {
+            resource.getText('initialText.txt').then(function (initialText) {
                 localStorage.target = initialText;
                 self.target(initialText);
             });

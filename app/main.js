@@ -5,18 +5,19 @@ require.config({
     }
 });
 
-require(["knockout", "navigation"], function (ko, navigation) {
-    var knockoutApp = document.getElementById('knockout-app');
-    var rootModel = {
-        navigate: function(path){
-            return navigation.navigate(path);
-        }
-    };
+require([
+    "knockout", "navigation",
 
-    ko.applyBindings(rootModel, knockoutApp);
-    if (window.location.hash && window.location.hash.length > 0) {
-        navigation.loadComponent(window.location.hash);
-    } else {
-        navigation.loadComponent("home");
-    }
-});
+    // dependencies without reference.
+    'agua'],
+    function (ko, navigation) {
+        var knockoutApp = document.getElementById('knockout-app');
+        var rootModel = {
+            viewName : navigation.viewName,
+            navigate: function (path) {
+                return navigation.navigate(path);
+            }
+        };
+
+        ko.applyBindings(rootModel, knockoutApp);
+    });
