@@ -12,6 +12,7 @@ define(['knockout'], function (ko) {
                         accept(xhttp.responseText);
                     }
                 };
+                
                 xhttp.open("GET", templateName, true);
                 xhttp.send();
             });
