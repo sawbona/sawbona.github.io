@@ -1,10 +1,15 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Take a look to the state of my current and future coding projects">
+    <meta property="og:title" content="Jacob Lobaco's Home Page" />
+    <meta property="og:url" content="https://sawbona.github.io/" />
+    
+    <meta property="og:image" content="./app/resources/images/mocka_02_sm.png">
+    <meta property="og:type" content="article" />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -15,36 +20,69 @@
     <title>Jacob Lobaco</title>
 </head>
 
-<body>
+<body id="knockout-app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"></a>
+        <a class="navbar-brand" href="#">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container-fluid">
+            <div class="row p-2" style="width: 100%">
+                <div class="col p-2">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tools
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#typetool" data-bind="click: function(){
+                                        return navigate('typetool');
+                                    }">Typetool</a>
+                                <!-- <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a> -->
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Visualizations
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#visualizations/01" data-bind="click: function(){
+                                    return navigate('visualizations/01');
+                                }">Sine</a>
+                                <!-- <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a> -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col p-2">
+                    <a class="nav-link" href="./index.html">
+                        <img width="80" height="80" src="./app/resources/images/mocka_02_xs.png"
+                            class="rounded mx-auto d-block" alt="Mocka!">
+                    </a>
+                </div>
+                <div class="col p-2">&nbsp;</div>
+            </div>
 
-        <div class="row" id="knockout-app">
+
+        </div>
+
+    </nav>
+    <hr class="m-0 p-0" />
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-sm-3">
-                <nav class="nav flex-column">
-                    <a class="nav-link active" href="#typetool" data-bind="click: function(){
-                        return navigate('typetool');
-                    }">Typetool</a>
-                </nav>
-                <nav class="nav flex-column">
-                    <a class="nav-link active" href="#visualizations/01" data-bind="click: function(){
-                            return navigate('visualizations/01');
-                        }">Visualizations 01</a>
-                </nav>
             </div>
             <div class="col-sm-6" data-bind="component: viewName">
             </div>
