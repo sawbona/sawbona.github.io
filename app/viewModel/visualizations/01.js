@@ -1,4 +1,4 @@
-define(['main/animation', 'main/math'], function (Animation, math) {
+define(['animation', 'math'], function (Animation, math) {
     function Model() {
         var self = this;
         var animation = new Animation('canvas');
@@ -51,18 +51,24 @@ define(['main/animation', 'main/math'], function (Animation, math) {
 
         // events
 
-        self.chooseRandomColor = function(data, event){
+        function randomColor(){
             animation.update(function(ctx, step, canvas){
                 var red = Math.random() * 256;
                 var green = Math.random() * 256;
                 var blue = Math.random() * 256;
                 ctx.strokeStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
             });
+        }
+
+        self.chooseRandomColor = function(data, event){
+            randomColor();
         };
 
         self.resetCanvas = function(data, event){
             points = [];
         };
+
+        randomColor();
     }
 
     return Model;

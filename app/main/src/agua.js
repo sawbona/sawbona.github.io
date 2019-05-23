@@ -1,4 +1,4 @@
-define(['knockout'], function (ko) {
+define(['knockout', "spa"], function (ko, spa) {
     function Agua() {
         var self = this;
 
@@ -19,7 +19,7 @@ define(['knockout'], function (ko) {
         }
 
         function loadComponent(path, element, parameters) {
-                if (path.length > 0 && path.substring(0, 1) === "#") {
+            if (path.length > 0 && path.substring(0, 1) === "#") {
                 path = path.substring(1, path.length);
             }
             var prefix = "./";
@@ -33,7 +33,7 @@ define(['knockout'], function (ko) {
                     element.removeChild(element.firstChild);
                 }
                 element.appendChild(node);
-                require([prefix + "viewModel/" + path], function (model) {
+                require(["!../../viewModel/" + path], function (model) {
                     ko.applyBindings(model, node);
                     if (model && model.afterApplyBidings) {
                         model.afterApplyBidings();
@@ -41,6 +41,22 @@ define(['knockout'], function (ko) {
                 });
             });
         }
+
+        ko.bindingHandlers.navigate = {
+            init: function(element, valueAccessor, allBidings, viewModel, bidingContext){
+
+            },
+            update: function(element, valueAccessor, allBidings, viewModel, bidingContext){
+                var value = valueAccessor();
+                var navigationPath = ko.unwrap(value);
+                var parameters = allBidings.get('params') || {};
+                
+                element.onclick = function(){
+                    spa.show(navigationPath);
+                    // return true;
+                }
+            }
+        };
 
         ko.bindingHandlers.component = {
             init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {

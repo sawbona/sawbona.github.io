@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -7,7 +8,7 @@
     <meta name="description" content="Take a look to the state of my current and future coding projects">
     <meta property="og:title" content="Jacob Lobaco's Home Page" />
     <meta property="og:url" content="https://sawbona.github.io/" />
-    
+
     <meta property="og:image" content="./app/resources/images/mocka_02_sm.png">
     <meta property="og:type" content="article" />
 
@@ -64,14 +65,40 @@
                                 <a class="dropdown-item" href="#">Something else here</a> -->
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Games
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item"
+                                data-bind="navigate: 'games/yacc'">YACC</a>
+                                <!-- <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a> -->
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                About
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#about" data-bind="click: function(){
+                                        return navigate('about');
+                                    }">About This Site</a>
+                                <!-- <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a> -->
+                            </div>
+                        </li>
                     </ul>
                 </div>
-                <div class="col p-2">
+                <!-- <div class="col p-2">
                     <a class="nav-link" href="./index.html">
-                        <img width="80" height="80" src="./app/resources/images/mocka_02_xs.png"
-                            class="rounded mx-auto d-block" alt="Mocka!">
+                        
                     </a>
-                </div>
+                </div> -->
                 <div class="col p-2">&nbsp;</div>
             </div>
 
