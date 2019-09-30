@@ -4,6 +4,6 @@ require.config({
     }
 });
 
-require(['sapex/snake/game'], function(game){
+require(['sapex/g1/game'], function(game){
     console.log('game: ' + game);
 });
