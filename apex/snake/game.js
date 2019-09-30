@@ -41,6 +41,13 @@ define(function () {
         self.start = function (n, m) {
             view = new View(new Matrix(n, m));
             view.draw();
+            function redraw(){
+                setTimeout(function(){
+                    view.draw();
+                    redraw();
+                }, 100);
+            }
+            redraw();
         };
 
         self.reload = function(){
