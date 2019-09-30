@@ -5,5 +5,5 @@ require.config({
 });
 
 require(['sapex/snake/game'], function(game){
-    console.log(game);
+    game.start();
 });
