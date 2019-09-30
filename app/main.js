@@ -3,6 +3,7 @@ require.config({
     paths: {
         Vue: 'https://cdn.jsdelivr.net/npm/vue/dist/vue',
         knockout: 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min',
+        sapex: '../../../apex'
     }
 });
 

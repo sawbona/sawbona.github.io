@@ -1,77 +1,57 @@
+"strict";
 define(function () {
+    function Matrix(n, m) {
+        var mem = [];
+        for (var i = 0; i < n; i++) {
+            var row = [];
+            for (var j = 0; j < m; j++) {
+                row.push({
+                    food: false,
+                    snake: false
+                });
+            }
+            mem.push(row);
+        }
+        var self = this;
+        self.n = n;
+        self.m = m;
+    }
+
+    function View(matrix) {
+        var self = this;
+        var canvas = document.getElementById('canvas');
+        var width = canvas.width;
+        var ctx = canvas.getContext('2d');
+        var scale = width / matrix.m;
+        ctx.lineWidth = 10;
+        self.draw = function () {
+            for (var i = 0; i < matrix.n; i++) {
+                for (var j = 0; j < matrix.m; j++) {
+                    ctx.fillStyle = Math.random() * 2 < 1 ? 'black' : 'white';
+                    ctx.fillRect(i * scale, j * scale, scale, scale);
+                }
+            }
+        };
+    }
 
     function Game() {
-        var canvas = document.getElementById('canvas');
         var self = this;
-        self.start = function () {
-            var ctx = canvas.getContext('2d');
-
-            ctx.strokeStyle = "#fc0";
-            ctx.lineWidth = 1.5;
-            ctx.fillRect(0, 0, 300, 300);
-
-            // Uniform scaling
-            ctx.save()
-            ctx.translate(50, 50);
-            drawSpirograph(ctx, 22, 6, 5);  // no scaling
-
-            ctx.translate(100, 0);
-            ctx.scale(0.75, 0.75);
-            drawSpirograph(ctx, 22, 6, 5);
-
-            ctx.translate(133.333, 0);
-            ctx.scale(0.75, 0.75);
-            drawSpirograph(ctx, 22, 6, 5);
-            ctx.restore();
-
-            // Non uniform scaling (y direction)
-            ctx.strokeStyle = "#0cf";
-            ctx.save()
-            ctx.translate(50, 150);
-            ctx.scale(1, 0.75);
-            drawSpirograph(ctx, 22, 6, 5);
-
-            ctx.translate(100, 0);
-            ctx.scale(1, 0.75);
-            drawSpirograph(ctx, 22, 6, 5);
-
-            ctx.translate(100, 0);
-            ctx.scale(1, 0.75);
-            drawSpirograph(ctx, 22, 6, 5);
-            ctx.restore();
-
-            // Non uniform scaling (x direction)
-            ctx.strokeStyle = "#cf0";
-            ctx.save()
-            ctx.translate(50, 250);
-            ctx.scale(0.75, 1);
-            drawSpirograph(ctx, 22, 6, 5);
-
-            ctx.translate(133.333, 0);
-            ctx.scale(0.75, 1);
-            drawSpirograph(ctx, 22, 6, 5);
-
-            ctx.translate(177.777, 0);
-            ctx.scale(0.75, 1);
-            drawSpirograph(ctx, 22, 6, 5);
-            ctx.restore();
-            function drawSpirograph(ctx, R, r, O) {
-                var x1 = R - O;
-                var y1 = 0;
-                var i = 1;
-                ctx.beginPath();
-                ctx.moveTo(x1, y1);
-                do {
-                    if (i > 20000) break;
-                    var x2 = (R + r) * Math.cos(i * Math.PI / 72) - (r + O) * Math.cos(((R + r) / r) * (i * Math.PI / 72))
-                    var y2 = (R + r) * Math.sin(i * Math.PI / 72) - (r + O) * Math.sin(((R + r) / r) * (i * Math.PI / 72))
-                    ctx.lineTo(x2, y2);
-                    x1 = x2;
-                    y1 = y2;
-                    i++;
-                } while (x2 != R - O && y2 != 0);
-                ctx.stroke();
+        var view = null;
+        self.status = "";
+        self.start = function (n, m) {
+            view = new View(new Matrix(n, m));
+            view.draw();
+            function redraw(){
+                setTimeout(function(){
+                    view.draw();
+                    redraw();
+                }, 100);
             }
+            redraw();
+        };
+
+        self.reload = function(){
+            view.draw();
         };
     }
 
