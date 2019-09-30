@@ -4,6 +4,9 @@ require.config({
     }
 });
 
+/**
+ * Main entry point from apex.oracle.com
+ */
 require(['sapex/snake/game'], function(game){
-    game.start();
+    game.start(100, 100);
 });
