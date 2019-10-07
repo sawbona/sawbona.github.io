@@ -1,11 +1,11 @@
 "strict";
 define(function () {
+    var UP = 0;
+    var RIGHT = 1;
+    var DOWN = 2;
+    var LEFT = 3;
     function GameVisualizer(matrix, game) {
         var self = this;
-        var UP = 0;
-        var RIGHT = 1;
-        var DOWN = 2;
-        var LEFT = 3;
         var canvas = document.getElementById('canvas');
         var width = canvas.offsetWidth;
         var ctx = canvas.getContext('2d');
