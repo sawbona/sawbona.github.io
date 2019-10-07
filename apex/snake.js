@@ -8,5 +8,5 @@ require.config({
  * Main entry point from apex.oracle.com
  */
 require(['sapex/snake/game'], function(game){
-    game.start(100, 100);
+    game.start(20, 20);
 });
