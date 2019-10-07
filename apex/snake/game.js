@@ -311,16 +311,16 @@ define(function () {
         document.addEventListener("keypress", function (e) {
             switch (e.keyCode || e.which) {
                 case 37:
-                    snake.setDirection(3);
+                    snake.setDirection(LEFT);
                     break;
                 case 38:
-                    snake.setDirection(0);
+                    snake.setDirection(UP);
                     break;
                 case 39:
-                    snake.setDirection(1);
+                    snake.setDirection(RIGHT);
                     break;
                 case 40:
-                    snake.setDirection(2);
+                    snake.setDirection(DOWN);
                     break;
             }
         });
