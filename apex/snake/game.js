@@ -2,6 +2,10 @@
 define(function () {
     function GameVisualizer(matrix, game) {
         var self = this;
+        var UP = 0;
+        var RIGHT = 1;
+        var DOWN = 2;
+        var LEFT = 3;
         var canvas = document.getElementById('canvas');
         var width = canvas.offsetWidth;
         var ctx = canvas.getContext('2d');
@@ -324,16 +328,16 @@ define(function () {
         detectSwipe('canvas', function (element, dir) {
             switch (dir) {
                 case 'up':
-                    snake.setDirection(0);
+                    snake.setDirection(UP);
                     break;
                 case 'right':
-                    snake.setDirection(1);
+                    snake.setDirection(RIGHT);
                     break;
-                case 'dow':
-                    snake.setDirection(2);
+                case 'down':
+                    snake.setDirection(DOWN);
                     break;
                 case 'left':
-                    snake.setDirection(3);
+                    snake.setDirection(LEFT);
                     break;
             }
         });
