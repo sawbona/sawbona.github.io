@@ -325,7 +325,7 @@ define(function () {
             }
         });
 
-        detectSwipe('canvas', function (element, dir) {
+        detectSwipe('knockout-app', function (element, dir) {
             switch (dir) {
                 case 'up':
                     snake.setDirection(UP);
