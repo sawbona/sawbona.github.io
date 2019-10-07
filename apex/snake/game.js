@@ -321,7 +321,7 @@ define(function () {
             }
         });
 
-        detectSwipe('canvas', function (dir) {
+        detectSwipe('canvas', function (element, dir) {
             switch (dir) {
                 case 'up':
                     snake.setDirection(0);
