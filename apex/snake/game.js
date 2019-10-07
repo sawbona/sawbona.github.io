@@ -386,6 +386,7 @@ define(function () {
 
                 if ((direction !== null) && (typeof f === 'function')) {
                     f(element, direction);
+                    event.stopPropagation();
                 }
             });
         }
