@@ -1,104 +1,7 @@
 "strict";
-define(function () {
-    var UP = 0;
-    var RIGHT = 1;
-    var DOWN = 2;
-    var LEFT = 3;
-    function GameVisualizer(matrix, game) {
-        var self = this;
-        var canvas = document.getElementById('canvas');
-        var width = canvas.offsetWidth;
-        var ctx = canvas.getContext('2d');
-        var scale = width / matrix.m;
-        var snake = game.getSnake();
-        ctx.lineWidth = 10;
-        var colors = {
-            snake: 'darkblue',
-            fruit: 'green'
-        };
-        function getColor(cell) {
-            var keys = Object.keys(cell);
-            for (var i = 0; i < keys.length; i++) {
-                var keyName = keys[i];
-                if (cell[keyName] === true) {
-                    return colors[keyName];
-                }
-            }
-            return 'white';
-        }
-
-        function drawPoint(i, j) {
-            ctx.fillRect(j * scale, i * scale, scale, scale);
-        }
-
-        var drawers = [];
-
-        drawers.push({
-            draw: function () {
-                var buff = [];
-                for (var i = 0; i < matrix.n; i++) {
-                    var ren = "";
-                    for (var j = 0; j < matrix.m; j++) {
-                        ren += matrix.get(i, j)
-                    }
-                    buff.push(ren);
-                }
-                buff.push("snake: " + snake.length());
-                console.log(buff.join("\n"));
-            }
-        });
-
-        // draw backgroud (white)
-        drawers.push({
-            draw: function () {
-                console.log("brackground");
-                for (var i = 0; i < matrix.n; i++) {
-                    for (var j = 0; j < matrix.m; j++) {
-                        ctx.fillStyle = 'white';
-                        drawPoint(i, j);
-                        matrix.set(i, j, 0);
-                    }
-                }
-            }
-        });
-
-        // fruits
-        drawers.push({
-            draw: function () {
-                console.log("fruits");
-                var fruits = game.getFruits();
-                fruits.forEach(function (f) {
-                    ctx.fillStyle = getColor({
-                        fruit: true
-                    });
-                    drawPoint(f.i, f.j);
-                    matrix.set(f.i, f.j, 2);
-                });
-            }
-        });
-
-        // snake drawer
-        drawers.push({
-            draw: function () {
-                var current = snake;
-                while (current != null) {
-                    ctx.fillStyle = getColor({
-                        snake: true
-                    });
-                    drawPoint(current.i, current.j);
-                    matrix.set(current.i, current.j, 1);
-                    current = current.next;
-                }
-            }
-        });
-
-        self.draw = function () {
-            drawers.forEach(function (d) {
-                d.draw();
-            });
-        };
-
-    }
+define(['sapex/snake/keyboardHandler',
+    'sapex/snake/gameVisualizer'], function (keyboardHandler,
+        GameVisualizer) {
 
     function Matrix(n, m) {
         var self = this;
@@ -273,6 +176,7 @@ define(function () {
         self.start = function (n, m) {
             matrix = new Matrix(n, m);
             snake = new SnakeNode(Math.floor(n / 2), Math.floor(m / 2), matrix);
+            keyboardHandler.init(snake);
             fruits.push(matrix.findEmptySpot());
             view = new GameVisualizer(matrix, self);
             loop();
@@ -307,90 +211,6 @@ define(function () {
         self.reload = function () {
             view.draw();
         };
-
-        document.addEventListener("keypress", function (e) {
-            switch (e.keyCode || e.which) {
-                case 37:
-                    snake.setDirection(LEFT);
-                    break;
-                case 38:
-                    snake.setDirection(UP);
-                    break;
-                case 39:
-                    snake.setDirection(RIGHT);
-                    break;
-                case 40:
-                    snake.setDirection(DOWN);
-                    break;
-            }
-        });
-
-        detectSwipe('knockout-app', function (element, dir) {
-            switch (dir) {
-                case 'up':
-                    snake.setDirection(UP);
-                    break;
-                case 'right':
-                    snake.setDirection(RIGHT);
-                    break;
-                case 'down':
-                    snake.setDirection(DOWN);
-                    break;
-                case 'left':
-                    snake.setDirection(LEFT);
-                    break;
-            }
-        });
-
-        function detectSwipe(id, f) {
-            var detect = {
-                startX: 0,
-                startY: 0,
-                endX: 0,
-                endY: 0,
-                minX: 30,   // min X swipe for horizontal swipe
-                maxX: 30,   // max X difference for vertical swipe
-                minY: 50,   // min Y swipe for vertial swipe
-                maxY: 60    // max Y difference for horizontal swipe
-            },
-                direction = null,
-                element = document.getElementById(id);
-
-            element.addEventListener('touchstart', function (event) {
-                var touch = event.touches[0];
-                detect.startX = touch.screenX;
-                detect.startY = touch.screenY;
-            });
-
-            element.addEventListener('touchmove', function (event) {
-                event.preventDefault();
-                var touch = event.touches[0];
-                detect.endX = touch.screenX;
-                detect.endY = touch.screenY;
-            });
-
-            element.addEventListener('touchend', function (event) {
-                if (
-                    // Horizontal move.
-                    (Math.abs(detect.endX - detect.startX) > detect.minX)
-                    && (Math.abs(detect.endY - detect.startY) < detect.maxY)
-                ) {
-                    direction = (detect.endX > detect.startX) ? 'right' : 'left';
-                } else if (
-                    // Vertical move.
-                    (Math.abs(detect.endY - detect.startY) > detect.minY)
-                    && (Math.abs(detect.endX - detect.startX) < detect.maxX)
-                ) {
-                    direction = (detect.endY > detect.startY) ? 'down' : 'up';
-                }
-
-                if ((direction !== null) && (typeof f === 'function')) {
-                    f(element, direction);
-                    event.stopPropagation();
-                }
-            });
-        }
     }
-
     return new Game();
 });
