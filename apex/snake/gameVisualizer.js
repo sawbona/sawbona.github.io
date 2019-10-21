@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-define(['sapex/snake/shapes'], function (Shapes) {
+define(['./shapes'], function (Shapes) {
     function GameVisualizer(matrix, game) {
         var self = this;
         var canvas = document.getElementById('canvas');

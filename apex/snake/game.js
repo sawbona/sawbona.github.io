@@ -1,6 +1,6 @@
 "strict";
-define(['sapex/snake/keyboardHandler',
-    'sapex/snake/gameVisualizer'], function (keyboardHandler,
+define(['./keyboardHandler',
+    './gameVisualizer'], function (keyboardHandler,
         GameVisualizer) {
 
     function Matrix(n, m) {
