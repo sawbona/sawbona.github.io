@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-define(['./shapes'], function (Shapes) {
+define(['sawbona/games/snake/shapes'], function (Shapes) {
     function GameVisualizer(matrix, game) {
         var self = this;
         var canvas = document.getElementById('canvas');
@@ -77,23 +77,28 @@ define(['./shapes'], function (Shapes) {
             }
         });
 
+        function drawSnake(current) {
+            while (current != null) {
+                ctx.fillStyle = getColor({
+                    snake: true
+                });
+                drawPoint(current.i, current.j);
+                matrix.set(current.i, current.j, 1);
+                current = current.next;
+            }
+        }
+
         // snake drawer
         drawers.push({
             draw: function () {
-                var current = snake;
-                while (current != null) {
-                    ctx.fillStyle = getColor({
-                        snake: true
-                    });
-                    drawPoint(current.i, current.j);
-                    matrix.set(current.i, current.j, 1);
-                    current = current.next;
-                }
+                drawSnake(snake);
+                game.getOpponents().forEach(o => {
+                    drawSnake(o);
+                });
             }
         });
 
         self.onBeforeDraw = function () {
-//            shapes.rec(0, 0, width, canvas.offsetHeight);
         };
 
         self.draw = function () {
