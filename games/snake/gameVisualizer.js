@@ -25,6 +25,7 @@ define(['sawbona/games/snake/shapes'], function (Shapes) {
         ctx.lineWidth = 10;
         var colors = {
             snake: 'darkblue',
+            oppoonent: 'lightblue',
             fruit: 'green'
         };
         function getColor(cell) {
@@ -77,11 +78,9 @@ define(['sawbona/games/snake/shapes'], function (Shapes) {
             }
         });
 
-        function drawSnake(current) {
+        function drawSnake(current, color) {
             while (current != null) {
-                ctx.fillStyle = getColor({
-                    snake: true
-                });
+                ctx.fillStyle = color;
                 drawPoint(current.i, current.j);
                 matrix.set(current.i, current.j, 1);
                 current = current.next;
@@ -91,9 +90,11 @@ define(['sawbona/games/snake/shapes'], function (Shapes) {
         // snake drawer
         drawers.push({
             draw: function () {
-                drawSnake(snake);
+                drawSnake(snake, getColor({
+                    snake: true
+                }));
                 game.getOpponents().forEach(o => {
-                    drawSnake(o);
+                    drawSnake(o, 'red');
                 });
             }
         });

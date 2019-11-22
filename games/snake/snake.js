@@ -21,13 +21,15 @@ define(['sawbona/games/snake/snakeNode'], function (SnakeNode) {
                 speed++;
             }
         }
-        
+        self.status = '';
         self.loop = function () {
-            setTimeout(function () {
-                collisions();
-                body.move();
-                self.loop();
-            }, 1000 / speed);
+            if(status === 'PLAY'){
+                setTimeout(function () {
+                    collisions();
+                    body.move();
+                    self.loop();
+                }, 1000 / speed);
+            }
         };
 
         Object.defineProperty(self, 'i', {

@@ -21,6 +21,9 @@ define(['multiplayer/communications'], function (communications) {
         self.i = n;
         self.j = m;
         var direction = 0;
+        self.getDirection = function(){
+            return direction;
+        };
         self.setDirection = function (value) {
             communications.notify({
                 type: 'CHANGE_DIRECTION',

@@ -1,10 +1,12 @@
 define(['sawbona/games/snake/matrix',
     'sawbona/games/snake/snake',
     'sawbona/games/snake/gameVisualizer',
-    'sawbona/games/snake/eventListeners'], function (Matrix,
+    'sawbona/games/snake/eventListeners',
+    'utils/observable'], function (Matrix,
         Snake,
         GameVisualizer,
-        eventListeners) {
+        eventListeners,
+        observable) {
     function Game() {
         var self = this;
         var view = null;
@@ -12,7 +14,11 @@ define(['sawbona/games/snake/matrix',
         var snake = null;
         var fruits = [];
         var opponents = [];
-        self.status = "";
+        self.status = observable('');
+        self.status.subscribe((value) => {
+            setSnakesStatus(value);
+            loop();
+        });
         self.getOpponents = function () {
             return opponents;
         };
@@ -25,21 +31,35 @@ define(['sawbona/games/snake/matrix',
         self.getMatrix = function(){
             return matrix;
         };
-        self.start = function (n, m) {
+        self.setSnake = function(value){
+            snake = value;
+        };
+        self.findEmptySpot = function(){
+            return matrix.findEmptySpot();
+        };
+        self.init = function (n, m) {
             matrix = new Matrix(n, m);
-            snake = new Snake(Math.floor(n / 2), Math.floor(m / 2), self);
-            opponents.push(new Snake(0, 0, self));
-            eventListeners.init(snake, 'body');
-            fruits.push(matrix.findEmptySpot());
+            // snake = new Snake(Math.floor(n / 2), Math.floor(m / 2), self);
+            // opponents.push(new Snake(0, 0, self));
+            // eventListeners.init(snake, 'body');
+            // fruits.push(matrix.findEmptySpot());
             view = new GameVisualizer(matrix, self);
             view.onBeforeDraw();
-            loop();
+            // loop();
             render();
         };
+        
         function loop() {
             snake.loop();
             opponents.forEach(o => {
                 o.loop();
+            });
+        }
+
+        function setSnakesStatus(status){
+            snake.status = status;
+            opponents.forEach(o => {
+                o.status = status;
             });
         }
 
