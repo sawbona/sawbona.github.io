@@ -6,20 +6,17 @@ require.config({
     }
 });
 
-require(
-    [
-        "knockout",
-        "navigation",
-        'agua'
-    ],
+require(["knockout",
+    "navigation",
+    'agua'],
     function (ko, navigation) {
-        var knockoutApp = document.getElementById('knockout-app');
-        var rootModel = {
-            viewName : navigation.viewName,
+        const knockoutApp = document.getElementById('knockout-app');
+        const rootModel = {
+            viewName: navigation.viewName,
             navigate: function (path) {
                 return navigation.navigate(path);
-            }
+            },
+            asd: 'asd'
         };
-
         ko.applyBindings(rootModel, knockoutApp);
     });

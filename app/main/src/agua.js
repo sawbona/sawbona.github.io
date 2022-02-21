@@ -1,7 +1,5 @@
 define(['knockout', "spa"], function (ko, spa) {
     function Agua() {
-        var self = this;
-
         function getTemplate(templateName) {
             var prefix = "app/";
             templateName = prefix + templateName;
@@ -12,7 +10,7 @@ define(['knockout', "spa"], function (ko, spa) {
                         accept(xhttp.responseText);
                     }
                 };
-                
+
                 xhttp.open("GET", templateName, true);
                 xhttp.send();
             });
@@ -42,22 +40,29 @@ define(['knockout', "spa"], function (ko, spa) {
             });
         }
 
+        /**
+         * This handler is applied using the `data-bind="navigate: <navigationPath>"` in the html menu.
+         * Flow path is:
+         * onclick -> spa.show -> navigation.js/viewName: ko.observable().
+         */
         ko.bindingHandlers.navigate = {
-            init: function(element, valueAccessor, allBidings, viewModel, bidingContext){
+            init: function (element, valueAccessor, allBidings, viewModel, bidingContext) {
 
             },
-            update: function(element, valueAccessor, allBidings, viewModel, bidingContext){
+            update: function (element, valueAccessor, allBidings, viewModel, bidingContext) {
                 var value = valueAccessor();
                 var navigationPath = ko.unwrap(value);
-                var parameters = allBidings.get('params') || {};
-                
-                element.onclick = function(){
+                // var parameters = allBidings.get('params') || {};
+                element.onclick = function () {
                     spa.show(navigationPath);
-                    // return true;
                 }
             }
         };
 
+        /**
+         * This handler is applied using the `data-bind="component: viewName"` syntaxt.
+         * Listens to: index.html -> main.js -> navigation.js/viewName: ko.observable();
+         */
         ko.bindingHandlers.component = {
             init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
                 // This will be called when the binding is first applied to an element

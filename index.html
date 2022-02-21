@@ -19,7 +19,8 @@
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="./app/main.css">
     <title>Jacob Lobaco</title>
-    <script data-ad-client="ca-pub-5905838050196422" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script data-ad-client="ca-pub-5905838050196422" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body id="knockout-app">
@@ -47,9 +48,6 @@
                                 <a class="dropdown-item" href="#typetool" data-bind="click: function(){
                                         return navigate('typetool');
                                     }">Typetool</a>
-                                <!-- <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a> -->
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -58,12 +56,11 @@
                                 Visualizations
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#visualizations/01" data-bind="click: function(){
-                                    return navigate('visualizations/01');
-                                }">Sine</a>
-                                <!-- <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#visualizations/01"
+                                    data-bind="navigate: 'visualizations/01'">Sine</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a> -->
+                                <a class="dropdown-item" href="#visualizations/02"
+                                    data-bind="navigate: 'visualizations/02'">Circle Monetization</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -97,18 +94,10 @@
                                 <a class="dropdown-item" href="#about" data-bind="click: function(){
                                         return navigate('about');
                                     }">About This Site</a>
-                                <!-- <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a> -->
                             </div>
                         </li>
                     </ul>
                 </div>
-                <!-- <div class="col p-2">
-                    <a class="nav-link" href="./index.html">
-                        
-                    </a>
-                </div> -->
                 <div class="col p-2">&nbsp;</div>
             </div>
 
