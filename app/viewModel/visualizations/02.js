@@ -16,7 +16,7 @@ class Corgis {
             /**
              * 60 fps.
              */
-            const fps = 60;
+            const fps = 5;
             this.setup(c, canvas.width, canvas.height);
             setInterval(() => {
                 const currentDate = Date.now();
@@ -25,9 +25,6 @@ class Corgis {
             }, 1 * 1000 / fps);
         }
         this.isFullscreenEnabled = ko.observable(false);
-        this.fullScreenText = ko.computed(() => {
-            return this.isFullscreenEnabled() ? 'Exit fullscreen' : 'Fullscreen';
-        });
         this.start = () => {
 
         }
@@ -42,6 +39,13 @@ class Corgis {
                 elem.msRequestFullscreen();
             }
         };
+
+        canvas.addEventListener('mousedown', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            this.circles.push({ x, y, r: 10 });
+        })
     }
 
     getCanvas() {
@@ -52,7 +56,7 @@ class Corgis {
         c.fillStyle = "black";
         c.fillRect(0, 0, w, h);
         this.circles = [];
-        this.circles.push(this.geom.circle(0, 0, 10));
+        this.circles.push({ x: 0, y: h / 2, r: 10 });
     }
 
     /**
@@ -61,21 +65,18 @@ class Corgis {
      * @param {Canvas2dContext} c Canvas 2d context.
      */
     render(t, c, w, h) {
-        const speed = 0.1;
-        const colorSpeed = 0.1;
-        c.fillStyle = `rgb(13, 80, ${((t * colorSpeed) % 100) + 50}, 0.45)`;
-        // console.log(`c.fillStyle = ${c.fillStyle}`);
-        const x = (t * speed) % w;
-        if (x % 10 < 9) {
-            return;
-        }
-        const circleHeight = 10;
-        const y = (h / 2) + (Math.sin(x * 2 * Math.PI / (w / 4)) * 50) + ((Math.floor((t * speed) / w)) * circleHeight * 1.8);
-        this.circles.forEach(circle => {
-            circle.x = x;
-            circle.y = y % h;
-            circle.r = circleHeight * Math.random();
-            circle.render(c);
+        this.circles.forEach(point => {
+            // if (t % 100 < 10) {
+            const colorSpeed = 0.1;
+            c.fillStyle = `rgb(13, 80, ${((t * (Math.random() * colorSpeed)) % 100) + 50}, 0.45)`;
+            c.beginPath();
+            // const y = point.y + ((point.x / w) * 8) + (Math.sin(point.x * 2 * Math.PI / (w / 4)) * 20);
+            const x = point.x + (t * 0.1);
+            const y = point.y + ((x / w) * 10) + (Math.sin((x) * ((2 * Math.PI) / (w / 4))) * 50);
+            c.arc(x % w, y % h, Math.random() * point.r, 0, 2 * Math.PI);
+            c.fill();
+            // }
+            // point.x = (point.x + 0.4);
         });
     }
 }
