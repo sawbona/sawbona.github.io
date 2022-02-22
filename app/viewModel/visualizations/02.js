@@ -7,9 +7,10 @@ console.log = (...args) => {
 }
 
 class Corgis {
-    constructor(ko) {
+    constructor(ko, geom) {
         const canvas = this.getCanvas();
         const c = canvas.getContext("2d");
+        this.geom = geom;
         if (c) {
             const start = Date.now();
             /**
@@ -48,8 +49,10 @@ class Corgis {
     }
 
     setup(c, w, h) {
-        // c.fillStyle = "black";
-        // c.fillRect(0, 0, w, h);
+        c.fillStyle = "black";
+        c.fillRect(0, 0, w, h);
+        this.circles = [];
+        this.circles.push(this.geom.circle(0, 0, 10));
     }
 
     /**
@@ -62,18 +65,20 @@ class Corgis {
         const colorSpeed = 0.1;
         c.fillStyle = `rgb(13, 80, ${((t * colorSpeed) % 100) + 50}, 0.45)`;
         // console.log(`c.fillStyle = ${c.fillStyle}`);
-        c.beginPath();
         const x = (t * speed) % w;
         if (x % 10 < 9) {
             return;
         }
         const circleHeight = 10;
         const y = (h / 2) + (Math.sin(x * 2 * Math.PI / (w / 4)) * 50) + ((Math.floor((t * speed) / w)) * circleHeight * 1.8);
-        c.arc(x, y % h, circleHeight, 0, 2 * Math.PI);
-        // c.stroke();
-        c.fill();
+        this.circles.forEach(circle => {
+            circle.x = x;
+            circle.y = y % h;
+            circle.r = circleHeight * Math.random();
+            circle.render(c);
+        });
     }
 }
-define(['knockout'], (ko) => {
-    return new Corgis(ko);
+define(['knockout', './geom/geom'], (ko, geom) => {
+    return new Corgis(ko, geom);
 });
