@@ -44,7 +44,7 @@ class Corgis {
             const rect = canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
-            this.circles.push({ x, y, r: 10 });
+            this.points.push({ x, y, r: 10, t: Date.now() });
         })
     }
 
@@ -55,8 +55,9 @@ class Corgis {
     setup(c, w, h) {
         c.fillStyle = "black";
         c.fillRect(0, 0, w, h);
-        this.circles = [];
-        this.circles.push({ x: 0, y: h / 2, r: 10 });
+        this.points = [];
+        this.points.push({ x: 0, y: h, r: 10, t: Date.now() });
+        // c.translate(0, h / 2);
     }
 
     /**
@@ -65,7 +66,7 @@ class Corgis {
      * @param {Canvas2dContext} c Canvas 2d context.
      */
     render(t, c, w, h) {
-        this.circles.forEach(point => {
+        this.points.forEach(point => {
             // if (t % 100 < 10) {
             const colorSpeed = 0.1;
             c.fillStyle = `rgb(13, 80, ${((t * (Math.random() * colorSpeed)) % 100) + 50}, 0.45)`;
