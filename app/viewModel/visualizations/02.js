@@ -1,11 +1,3 @@
-const consoleEnabled = true;
-const log = console.log;
-console.log = (...args) => {
-    if (consoleEnabled) {
-        log(...args);
-    }
-}
-
 class Corgis {
     constructor() {
         const canvas = this.getCanvas();

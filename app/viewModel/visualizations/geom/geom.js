@@ -25,7 +25,3 @@ class Geom {
         return new Circle(x, y, r);
     }
 }
-
-define([], function () {
-    return new Geom();
-});
