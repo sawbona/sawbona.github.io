@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-define([], function () {
-    function Matrix(n, m) {
+// define([], function () {
+export class Matrix {
+    constructor(n, m) {
         var self = this;
         var mem = [];
         for (var i = 0; i < n; i++) {
@@ -52,8 +53,7 @@ define([], function () {
             if (totalEmptySpots === 0) {
                 throw "no empty spots available";
             }
-            var ren = Math.floor(Math.random() * self.n),
-                    col = Math.floor(Math.random() * self.m);
+            var ren = Math.floor(Math.random() * self.n), col = Math.floor(Math.random() * self.m);
             var found = null;
             for (var i = ren; i < ren + self.n; i++) {
                 for (var j = col; j < col + self.m; j++) {
@@ -84,5 +84,6 @@ define([], function () {
             mem[n][m] = cell;
         };
     }
-    return Matrix;
-});
+}
+// return Matrix;
+// });

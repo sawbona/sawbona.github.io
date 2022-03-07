@@ -1,12 +1,16 @@
-define(["gamesResource"], function(gamesResource){
+// define(["gamesResource"], function(gamesResource){
 
-    function Game(){
+import { gamesResource } from './gamesResource.js';
+
+class Game {
+    constructor() {
         var self = this;
-        self.getGames = function(){
+        self.getGames = function () {
             return gamesResource.get("/");
         };
     }
+}
 
-    return new Game();
+export const game = new Game();
 
-});
+// });

@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-define(['sawbona/games/snake/shapes'], function (Shapes) {
-    function GameVisualizer(matrix, game) {
+// define(['sawbona/games/snake/shapes'], function (Shapes) {
+export class GameVisualizer {
+    constructor(matrix, game) {
         var self = this;
         var canvas = document.getElementById('canvas');
         var width = canvas.offsetWidth;
@@ -109,5 +110,6 @@ define(['sawbona/games/snake/shapes'], function (Shapes) {
         };
 
     }
-    return GameVisualizer;
-});
+}
+    // return GameVisualizer;
+// });

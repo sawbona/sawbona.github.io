@@ -1,29 +1,26 @@
-const consoleEnabled = true;
-const log = console.log;
-console.log = (...args) => {
-    if (consoleEnabled) {
-        log(...args);
-    }
-}
+
 
 class Corgis {
-    constructor() {
+    constructor(ko, geom) {
         const canvas = this.getCanvas();
         const c = canvas.getContext("2d");
+        this.geom = geom;
         if (c) {
             const start = Date.now();
             /**
              * 60 fps.
              */
-            const fps = 5;
+            this.fps = 60;
             this.setup(c, canvas.width, canvas.height);
             setInterval(() => {
                 const currentDate = Date.now();
                 const diff = (currentDate - start);
                 this.render(diff, c, canvas.width, canvas.height);
-            }, 1 * 1000 / fps);
+            }, 1 * 1000 / this.fps);
         }
+        this.isFullscreenEnabled = ko.observable(false);
         this.start = () => {
+
         }
         this.onFullScreen = () => {
             this.isFullscreenEnabled(!this.isFullscreenEnabled());
@@ -39,8 +36,8 @@ class Corgis {
 
         canvas.addEventListener('mousedown', (event) => {
             const rect = canvas.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
+            const x = event.clientX;
+            const y = event.clientY;
             this.points.push({ x, y, r: 10, t: Date.now() });
         })
     }
@@ -50,11 +47,12 @@ class Corgis {
     }
 
     setup(c, w, h) {
+        // this.fps = 5;
         c.fillStyle = "black";
         c.fillRect(0, 0, w, h);
         this.points = [];
         this.points.push({ x: 0, y: h, r: 10, t: Date.now() });
-        // c.translate(0, h / 2);
+        c.translate(100, 100);
     }
 
     /**
@@ -64,14 +62,17 @@ class Corgis {
      */
     render(t, c, w, h) {
         this.points.forEach(point => {
-            const colorSpeed = 0.1;
-            c.fillStyle = `rgb(13, 80, ${((t * (Math.random() * colorSpeed)) % 100) + 50}, 0.45)`;
+            if (t % 60 > 5) {
+                return;
+            }
+            c.fillStyle = `rgb(10, 23, 111, 0.5)`;
             c.beginPath();
-            const x = point.x + (t * 0.1);
-            const y = point.y + ((x / w) * 10) + (Math.sin((x) * ((2 * Math.PI) / (w / 4))) * 50);
+            const y = Math.sin(point.x) * 40 + point.y;
+            const x = point.x;
             c.arc(x % w, y % h, Math.random() * point.r, 0, 2 * Math.PI);
             c.fill();
+            point.x = t * 0.05;
+            point.y = Math.floor(x / w);
         });
     }
 }
-export const model = new Corgis();

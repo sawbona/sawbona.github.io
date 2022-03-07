@@ -1,24 +1,28 @@
-define(['sawbona/games/snake/matrix',
-    'sawbona/games/snake/snake',
-    'sawbona/games/snake/gameVisualizer',
-    'sawbona/games/snake/eventListeners',
-    'utils/observable'], function (Matrix,
-        Snake,
-        GameVisualizer,
-        eventListeners,
-        observable) {
-    function Game() {
+// define(['sawbona/games/snake/matrix',
+//     'sawbona/games/snake/snake',
+//     'sawbona/games/snake/gameVisualizer',
+//     'sawbona/games/snake/eventListeners',
+//     'utils/observable'], function (Matrix,
+//         Snake,
+//         GameVisualizer,
+//         eventListeners,
+//         observable) {
+// import { Snake } from './snake.js';
+import { GameVisualizer } from './gameVisualizer.js';
+import { Matrix } from './matrix.js';
+export class Game {
+    constructor() {
         var self = this;
         var view = null;
         var matrix = null;
         var snake = null;
         var fruits = [];
         var opponents = [];
-        self.status = observable('');
-        self.status.subscribe((value) => {
-            setSnakesStatus(value);
-            loop();
-        });
+        // self.status = observable('');
+        // self.status.subscribe((value) => {
+        //     setSnakesStatus(value);
+        //     loop();
+        // });
         self.getOpponents = function () {
             return opponents;
         };
@@ -28,13 +32,13 @@ define(['sawbona/games/snake/matrix',
         self.getFruits = function () {
             return fruits;
         };
-        self.getMatrix = function(){
+        self.getMatrix = function () {
             return matrix;
         };
-        self.setSnake = function(value){
+        self.setSnake = function (value) {
             snake = value;
         };
-        self.findEmptySpot = function(){
+        self.findEmptySpot = function () {
             return matrix.findEmptySpot();
         };
         self.init = function (n, m) {
@@ -48,20 +52,20 @@ define(['sawbona/games/snake/matrix',
             // loop();
             render();
         };
-        
-        function loop() {
-            snake.loop();
-            opponents.forEach(o => {
-                o.loop();
-            });
-        }
 
-        function setSnakesStatus(status){
-            snake.status = status;
-            opponents.forEach(o => {
-                o.status = status;
-            });
-        }
+        // function loop() {
+        //     snake.loop();
+        //     opponents.forEach(o => {
+        //         o.loop();
+        //     });
+        // }
+
+        // function setSnakesStatus(status) {
+        //     snake.status = status;
+        //     opponents.forEach(o => {
+        //         o.status = status;
+        //     });
+        // }
 
         function render() {
             setTimeout(function () {
@@ -74,5 +78,7 @@ define(['sawbona/games/snake/matrix',
         };
     }
 
-    return Game;
-});
+    start() {
+
+    }
+}

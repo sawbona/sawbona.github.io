@@ -1,5 +1,4 @@
-<div>
-
+<div id='type-tool-container'>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -12,11 +11,9 @@
                         <div class="row">
                             <div data-bind="css: {'col-md-4': !showTargetInput(), 'col-md-6' : showTargetInput()}">
                                 <div class="">
-
                                     <textarea wrap="off" rows="20" class="card-img-top form-control" style=""
                                         placeholder="Paste some content here..."
                                         data-bind="textInput: target, css: {'j-hidden': !showTargetInput()}"></textarea>
-
                                     <div class="card-body">
                                         <p class="card-text text-muted">
                                             Lenght: <span data-bind="text: target().length"></span> characters.
@@ -30,9 +27,7 @@
                                     <textarea wrap="off" autofocus="autofocus" id="typein" data-bind="textInput: input"
                                         rows="20" class="form-control card-img-top "
                                         placeholder="Type in here..."></textarea>
-
                                     <div class="card-body">
-
                                         <p class="card-text">
                                             Correct: <span data-bind="text: correctCount()"></span> of <span
                                                 data-bind="text: input().length"></span> characters.
@@ -51,8 +46,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                     <div class="card-footer">
                         <p>
@@ -64,21 +57,16 @@
                         <p>
                             Whenever you start typing in the right side the left side will be hidden. If you want to
                             show it again just
-                            click in the Show Left Panel button.∆
+                            click in the Show Left Panel button.
                         </p>
                         <p>
 
                             Clear the left side panel and refresh the page to get the initial text
                             back.
                         </p>
-
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>

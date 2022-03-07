@@ -19,8 +19,8 @@
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="./app/main.css">
     <title>Jacob Lobaco</title>
-    <script data-ad-client="ca-pub-5905838050196422" async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- <script data-ad-client="ca-pub-5905838050196422" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 </head>
 
 <body id="knockout-app">
@@ -37,7 +37,7 @@
                 <div class="col p-2">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="./">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -45,9 +45,7 @@
                                 Tools
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#typetool" data-bind="click: function(){
-                                        return navigate('typetool');
-                                    }">Typetool</a>
+                                <a class="dropdown-item" href="#typetool">Typetool</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -56,11 +54,11 @@
                                 Visualizations
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#visualizations/01"
-                                    data-bind="navigate: 'visualizations/01'">Sine</a>
+                                <a class="dropdown-item" href="#visualizations/01">Sine</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#visualizations/02"
-                                    data-bind="navigate: 'visualizations/02'">Circle Monetization</a>
+                                <a class="dropdown-item" href="#visualizations/02">Circle Monetization</a>
+                                <a class="dropdown-item" href="#visualizations/03">Proyections</a>
+                                <a class="dropdown-item" href="#visualizations/03">Cicles Imagin</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -69,9 +67,7 @@
                                 Apex
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#apex" data-bind="click: function(){
-                                    return navigate('apex');
-                                }">Samples</a>
+                                <a class="dropdown-item" href="#apex">Samples</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -80,9 +76,8 @@
                                 Games
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#games/snake"
-                                    data-bind="navigate: 'games/snake'">Snake</a>
-                                <a class="dropdown-item" data-bind="navigate: 'games/yacc'">YACC</a>
+                                <a class="dropdown-item" href="#games/snake">Snake</a>
+                                <a class="dropdown-item" href="#games/yacc">YACC</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -91,32 +86,28 @@
                                 About
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#about" data-bind="click: function(){
-                                        return navigate('about');
-                                    }">About This Site</a>
+                                <a class="dropdown-item" href="#about">About This Site</a>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="col p-2">&nbsp;</div>
             </div>
-
-
         </div>
-
     </nav>
     <hr class="m-0 p-0" />
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3">
             </div>
-            <div class="col-sm-6" data-bind="component: viewName">
+            <div class="col-sm-6" id='viewContainer'>
+                <!-- <div class="col-sm-6" data-bind="component: viewName" id='viewContainer'> -->
+                <div id='view'></div>
             </div>
             <div class="col-sm-3">
             </div>
         </div>
     </div>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -129,11 +120,9 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
-    <!-- <script src="./app/main.js"></script> -->
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="app/main"
-        integrity="sha256-1fEPhSsRKlFKGfK3eO710tEweHh1fwokU5wFGDHO+vg=" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script> -->
+    <script src='./app/main/src/panda/conejito.js' type="module"></script>
 </body>
 
 </html>

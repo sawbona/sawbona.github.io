@@ -1,5 +1,5 @@
-define([], function () {
-    function Animation(canvasId) {
+export class Animation {
+    constructor(canvasId) {
         var self = this;
         var canvas = document.getElementById(canvasId);
         var ctx = canvas.getContext('2d');
@@ -16,7 +16,7 @@ define([], function () {
         }
 
         // public functions
-        self.update = function(f){
+        self.update = function (f) {
             f(ctx, step, canvas);
         };
 
@@ -41,5 +41,4 @@ define([], function () {
             }
         };
     }
-    return Animation;
-});
+}

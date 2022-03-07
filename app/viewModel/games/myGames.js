@@ -1,7 +1,10 @@
-define(["knockout"], function(ko){
-    function Home(){
+// define(["knockout"], function(ko){
+class Home {
+    constructor() {
         var self = this;
-        self.games = ko.observableArray([]);
+        // self.games = ko.observableArray([]);
+        self.games = [];
     }
-    return new Home();
-});
+}
+export const home = new Home();
+// });

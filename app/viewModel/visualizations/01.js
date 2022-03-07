@@ -1,5 +1,7 @@
-define(['animation', 'math'], function (Animation, math) {
-    function Model() {
+import 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js';
+import { Animation } from '/app/main/src/animation.js'
+class Model {
+    constructor() {
         var self = this;
         var animation = new Animation('canvas');
         animation.config.fps = 10;
@@ -9,10 +11,8 @@ define(['animation', 'math'], function (Animation, math) {
             // ctx.fillRect(25, 25, 100, 100);
             // ctx.clearRect(45, 45, 60, 60);
             // ctx.strokeRect(50, 50, 50, 50);
-
         });
-        animation.run
-        (function (ctx, step, canvas) {
+        animation.run(function (ctx, step, canvas) {
             points.push(Math.sin(step));
 
             ctx.beginPath();
@@ -41,7 +41,7 @@ define(['animation', 'math'], function (Animation, math) {
                 y = y + (canvas.height / 2);
 
                 // shift
-                if(gap){
+                if (gap) {
                     x = x - (last - canvas.width);
                 }
                 drawCircle(x, y);
@@ -50,9 +50,8 @@ define(['animation', 'math'], function (Animation, math) {
         });
 
         // events
-
-        function randomColor(){
-            animation.update(function(ctx, step, canvas){
+        function randomColor() {
+            animation.update(function (ctx, step, canvas) {
                 var red = Math.random() * 256;
                 var green = Math.random() * 256;
                 var blue = Math.random() * 256;
@@ -60,16 +59,16 @@ define(['animation', 'math'], function (Animation, math) {
             });
         }
 
-        self.chooseRandomColor = function(data, event){
+        self.chooseRandomColor = function (data, event) {
             randomColor();
         };
 
-        self.resetCanvas = function(data, event){
+        self.resetCanvas = function (data, event) {
             points = [];
         };
 
         randomColor();
     }
-
-    return Model;
-});
+}
+const module = new Model();
+ko.applyBindings(module, document.getElementById('first-app'));

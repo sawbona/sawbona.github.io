@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-define(['multiplayer/communications'], function (communications) {
-
-    function SnakeNode(n, m, matrix) {
+// define(['multiplayer/communications'], function (communications) {
+export class SnakeNode {
+    constructor(n, m, matrix) {
         var self = this;
         self.next = null;
         self.i = n;
         self.j = m;
         var direction = 0;
-        self.getDirection = function(){
+        self.getDirection = function () {
             return direction;
         };
         self.setDirection = function (value) {
@@ -111,6 +111,6 @@ define(['multiplayer/communications'], function (communications) {
             last.next = new SnakeNode(i % matrix.n, j % matrix.m);
         };
     }
-
-    return SnakeNode;
-});
+}
+// return SnakeNode;
+// });

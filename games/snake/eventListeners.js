@@ -1,5 +1,5 @@
-define([], function () {
-    return new function () {
+export class EventListener {
+    constructor() {
         var self = this;
         var UP = 0;
         var RIGHT = 1;
@@ -88,4 +88,4 @@ define([], function () {
             }
         };
     };
-});
+}

@@ -1,5 +1,1 @@
-define([], function(){
-
-    return {};
-
-});
+export const module = {};

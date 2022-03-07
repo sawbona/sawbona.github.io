@@ -15,15 +15,17 @@
  */
 /* global ctx */
 
-define([], function () {
-    return function (ctx) {
-        var self = this;
-        self.rec = function (x, y, w, h) {
-            ctx.beginPath();
-            ctx.lineWidth = '2';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(x, y, w, h);
-            ctx.stroke();
-        };
-    };
-});
+// define([], function () {
+export class ShapeDrawer {
+    constructor(ctx) {
+        this.ctx = ctx;
+    }
+    rect() {
+        ctx.beginPath();
+        ctx.lineWidth = '2';
+        ctx.strokeStyle = 'blue';
+        ctx.rect(x, y, w, h);
+        ctx.stroke();
+    }
+}
+// });

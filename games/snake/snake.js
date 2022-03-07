@@ -1,5 +1,6 @@
-define(['sawbona/games/snake/snakeNode'], function (SnakeNode) {
-    function Snake(i, j, game) {
+import { SnakeNode } from './snakeNode.js';
+export class Snake {
+    constructor(i, j, game) {
         var self = this;
         var speed = 2;
         var matrix = game.getMatrix();
@@ -23,7 +24,7 @@ define(['sawbona/games/snake/snakeNode'], function (SnakeNode) {
         }
         self.status = '';
         self.loop = function () {
-            if(status === 'PLAY'){
+            if (status === 'PLAY') {
                 setTimeout(function () {
                     collisions();
                     body.move();
@@ -78,6 +79,4 @@ define(['sawbona/games/snake/snakeNode'], function (SnakeNode) {
             return body;
         };
     }
-
-    return Snake;
-});
+}
