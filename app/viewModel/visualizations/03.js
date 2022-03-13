@@ -23,6 +23,20 @@ class Particle {
     }
 }
 
+class BlackParticle extends Particle {
+    draw(c, t, w, h) {
+        if (this.counter++ % 60 === 0) {
+            c.fillStyle = `black`;
+            c.beginPath();
+            const x = t * this.speed;
+            const realoffset = (this.yoffset * (1 + Math.floor((x / w))));
+            const y = realoffset + (Math.sin((this.frequency * x / w) * (Math.PI * 2)) * 20);
+            c.arc(x % w, y % h, Math.random() * 30, 0, 2 * Math.PI);
+            c.fill();
+        }
+    }
+}
+
 export const model = new Corgis({
     setup(c, w, h) {
         c.fillStyle = "black";
@@ -30,6 +44,7 @@ export const model = new Corgis({
         this.speed = 0.1;
         this.particles = [];
         this.particles.push(new Particle(0.1, 8, 40));
+        this.particles.push(new BlackParticle(1, 8, 40));
     },
     render(t, c, w, h) {
         this.particles.forEach(p => {
