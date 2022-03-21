@@ -1,0 +1,21 @@
+{
+  "name": "sawbona.github.io",
+  "version": "1.0.0",
+  "description": "Add new elements to the menu:",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sawbona/sawbona.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sawbona/sawbona.github.io/issues"
+  },
+  "homepage": "https://github.com/sawbona/sawbona.github.io#readme"
+}

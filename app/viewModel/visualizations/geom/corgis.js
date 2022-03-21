@@ -19,6 +19,8 @@ export class Corgis {
         const canvas = this.getCanvas(this.config.canvasId);
         const c = canvas.getContext("2d");
         if (c) {
+            this.canvas = canvas;
+            this.c = c;
             const start = Date.now();
             /**
              * 60 fps.
@@ -30,9 +32,6 @@ export class Corgis {
                 const diff = (currentDate - start);
                 this.render(diff, c, canvas.width, canvas.height);
             }, 1 * 1000 / this.fps);
-        }
-        this.start = () => {
-
         }
         this.onFullScreen = () => {
             // this.isFullscreenEnabled(!this.isFullscreenEnabled());
@@ -74,5 +73,14 @@ export class Corgis {
      */
     render(...params) {
         this.config.render.call(this, ...params);
+    }
+
+    /**
+     * Clear all the canvas using fillStyle.
+     * @param {string} fillStyle Fill style for canvas context.
+     */
+    clear(fillStyle = 'black') {
+        this.c.fillStyle = fillStyle;
+        this.c.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
 }
