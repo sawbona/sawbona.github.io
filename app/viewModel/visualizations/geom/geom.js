@@ -41,7 +41,7 @@ class MatrixOperations {
             for (let indexColumnB in b[0]) {
                 let result = 0;
                 for (let indexColumnA in a[indexRowA]) {
-                    // Note: we us indexColumnA in a and also as a row index in b.
+                    // multiply elements in the row of A x column of B.
                     result += a[indexRowA][indexColumnA] * b[indexColumnA][indexColumnB];
                 }
                 rowResult[indexColumnB] = result;
@@ -51,6 +51,35 @@ class MatrixOperations {
         return result;
     }
 
+    /**
+     * Sum a + b and store the result in a.
+     * @param {Matrix} a 
+     * @param {*} b 
+     */
+    sum(a, b) {
+        for (let rowA in a) {
+            for (let columnA in a[rowA]) {
+                a[rowA][columnA] = a[rowA][columnA] + b[rowA][columnA];
+            }
+        }
+    }
+
+    create(params) {
+        const { values, n, m } = params;
+        if (values.length !== (n * m)) {
+            throw Error(`Invalid number of values. Expected: ${n * m}, but got: ${values.length}`);
+        }
+
+        const result = [];
+        for (let i = 0; i < n; ++i) {
+            const row = [];
+            for (let j = 0; j < m; ++j) {
+                row[j] = values[i * m + j];
+            }
+            result.push(row);
+        }
+        return result;
+    }
 }
 
 export const matrix = new MatrixOperations();

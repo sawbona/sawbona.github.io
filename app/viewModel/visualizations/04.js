@@ -1,23 +1,16 @@
 import { Corgis } from './geom/corgis.js'
 import { matrix } from './geom/geom.js';
 
-let a = [[1, 2, 3], [4, 5, 6]];
-let b = [[7, 8], [9, 10], [11, 12]];
-let test = matrix.multiply(a, b);
-console.log(test);
-
 class Point {
     constructor(x, y, z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.values = [x, y, z];
     }
 
     render(c) {
         c.beginPath();
-        c.arc(this.x, this.y, 10, 0, Math.PI * 2);
+        c.arc(this.values[0], this.values[1], 3, 0, Math.PI * 2);
         c.lineWidth = 2;
-        c.strokeStyle = 'red';
+        c.strokeStyle = 'white';
         c.stroke();
     }
 }
@@ -42,22 +35,39 @@ export const model = new Corgis({
         c.fillRect(0, 0, w, h);
         this.speed = 0.1;
         this.cube = new Cube();
+        this.cube.points.forEach(p => {
+            p.values = matrix.multiply([p.values], matrix.create({
+                values: [10, 0, 0, 0, 10, 0, 0, 0, 10],
+                n: 3,
+                m: 3
+            }))[0];
+        });
+        const tsecond = 0.04;
+        const rotationMatrix = [
+            [Math.cos(tsecond), -Math.sin(tsecond), 0],
+            [Math.sin(tsecond), Math.cos(tsecond), 0],
+            [0, 0, 1]
+        ];
+        this.rotationMatrix = rotationMatrix;
+        this.translate = matrix.create({
+            values: [50, 50, 50],
+            n: 1,
+            m: 3
+        });
+        this.translate2 = matrix.multiply(this.translate, matrix.create({
+            values: [-1, 0, 0, 0, -1, 0, 0, 0, -1],
+            n: 3,
+            m: 3
+        }));
     },
     render(t, c, w, h) {
         this.clear();
-        const tsecond = Math.sqrt(t);
-        const rotationMatrix = [
-            [Math.cos(tsecond), -Math.sin(tsecond)],
-            [Math.sin(tsecond), Math.cos(tsecond)]
-        ];
         this.cube.points.forEach(p => {
-            const size = 50;
-            const result = matrix.multiply(rotationMatrix, [[p.x], [p.y]]);
-            const m = new Point(result[0][0] * size, result[1][0] * size, p.z * size);
-            m.x += 80;
-            m.y += 80;
-            m.z += 80;
-            m.render(c);
+            let temp = matrix.multiply([p.values], this.rotationMatrix);
+            p.values = temp[0];
+            matrix.sum([p.values], this.translate);
+            p.render(c);
+            matrix.sum([p.values], this.translate2);
         });
     }
 });

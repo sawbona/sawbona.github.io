@@ -27,10 +27,15 @@ export class Corgis {
              */
             this.fps = 60;
             this.setup(c, canvas.width, canvas.height);
-            setInterval(() => {
+            this.interval = setInterval(() => {
                 const currentDate = Date.now();
                 const diff = (currentDate - start);
-                this.render(diff, c, canvas.width, canvas.height);
+                try {
+                    this.render(diff, c, canvas.width, canvas.height);
+                } catch (e) {
+                    console.error(e);
+                    clearInterval(this.interval);
+                }
             }, 1 * 1000 / this.fps);
         }
         this.onFullScreen = () => {
