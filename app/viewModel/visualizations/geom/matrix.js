@@ -9,6 +9,24 @@ export class Matrix {
         this.m = m;
     }
 
+    get x() {
+        return this.values[0];
+    }
+
+    get y() {
+        return this.values[1];
+    }
+
+    get z() {
+        return this.values[2];
+    }
+
+    sumEscalar(escalar) {
+        for (let i in this.values) {
+            this.values[i] += escalar;
+        }
+    }
+
     sum(other) {
         if (this.n !== other.n || this.m !== other.m) {
             throw Error(`Wrong dimensions. this.n: ${this.n}, other.n: ${other.n}, this.m: ${this.m}, other.m: ${other.m}`);

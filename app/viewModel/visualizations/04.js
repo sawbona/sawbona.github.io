@@ -1,5 +1,6 @@
 import { Corgis } from './geom/corgis.js'
 import { matrix } from './geom/geom.js';
+import { Matrix } from './geom/matrix.js';
 
 class Point {
     constructor(x, y, z) {
@@ -60,6 +61,7 @@ export const model = new Corgis({
             m: 3
         }));
     },
+
     render(t, c, w, h) {
         this.clear();
         this.cube.points.forEach(p => {
