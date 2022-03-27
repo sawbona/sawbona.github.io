@@ -11,6 +11,10 @@ class Main {
         this.wire();
     }
 
+    /**
+     * Select a group of elements in html and 
+     * @param {string} selector 
+     */
     wire(selector = '.dropdown-item') {
         const links = Array.from(document.querySelectorAll(selector)).filter(e => !e.getAttribute('data-bind'));
         links.forEach(element => {
