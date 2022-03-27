@@ -1,3 +1,7 @@
 .j-hidden{
     opacity: 0;
 }
+
+#circle-canvas {
+    cursor:none;
+}

@@ -35,7 +35,7 @@ export const model = new Corgis({
     setup(c, w, h) {
         c.fillStyle = "white";
         c.fillRect(0, 0, w, h);
-        this.speed = 0.1;
+        // this.speed = 0.1;
         this.cube = new Cube();
         // this.cube.points.forEach(p => {
         //     p.values = matrix.multiply([p.values], matrix.create({
