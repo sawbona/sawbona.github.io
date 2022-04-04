@@ -1,5 +1,9 @@
 export class Matrix {
 
+    static vector(...values) {
+        return new Matrix(values);
+    }
+
     constructor(values, n = 1, m = values.length) {
         if (values.length !== (n * m)) {
             throw Error(`Wrong definition. Expected values.length: ${values.length}, got: n: ${n}, m: ${m}. n * m = ${n * m}`);
