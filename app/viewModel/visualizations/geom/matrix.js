@@ -21,6 +21,10 @@ export class Matrix {
         return this.values[1];
     }
 
+    set y(value) {
+        this.values[1] = value;
+    }
+
     get z() {
         return this.values[2];
     }

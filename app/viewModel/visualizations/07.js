@@ -62,10 +62,13 @@ export const model = new Corgis({
         this.initialStars = 1 + (Math.random() * 9);
         this.stars = [];
         for (let i = 0; i < this.initialStars; i++) {
+            const r = Math.random();
             this.stars.push({
                 img: this.img,
                 position: Matrix.vector(RandomUtils.range(0, w), RandomUtils.range(0, h - 200), 0),
-                delta: Matrix.vector(Math.random() * -0.05, 0, 0),
+                delta: Matrix.vector(r * -0.05, 0, 0),
+                scale: 0.1 + (r * 0.9),
+                reset: false
             });
         }
     },
@@ -74,10 +77,20 @@ export const model = new Corgis({
         this.clear();
         if (this.imageReady.every(x => x)) {
             this.stars.forEach(s => {
-                c.drawImage(s.img, Limits.extendedMod(s.position.x, -32, w), s.position.y);
+                if (s.reset) {
+                    s.position.y = RandomUtils.range(0, h - 200);
+                    const random = Math.random();
+                    s.delta = Matrix.vector(random * -0.05, 0, 0);
+                    s.scale = 0.1 + (random * 0.9);
+                    s.reset = false;
+                }
+                const x = Limits.extendedMod(s.position.x, -32, w);
+                if (x + 0.1 >= w) {
+                    s.reset = true;
+                }
+                c.drawImage(s.img, x, s.position.y, 32 * s.scale, 32 * s.scale);
                 s.position.sum(s.delta);
             });
-
 
             c.drawImage(this.gif.image, Limits.extendedMod(this.point.x, -360, w), this.point.y);
             this.point.sum(this.delta);
