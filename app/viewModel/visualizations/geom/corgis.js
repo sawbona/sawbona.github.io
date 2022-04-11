@@ -1,4 +1,6 @@
 
+let lastInterval = 0;
+
 /**
  * Basic class for animation setup.
  */
@@ -27,6 +29,7 @@ export class Corgis {
              */
             this.fps = 60;
             this.setup(c, canvas.width, canvas.height);
+            clearInterval(lastInterval);
             this.interval = setInterval(() => {
                 const currentDate = Date.now();
                 const diff = (currentDate - start);
@@ -37,9 +40,9 @@ export class Corgis {
                     clearInterval(this.interval);
                 }
             }, 1 * 1000 / this.fps);
+            lastInterval = this.interval;
         }
         this.onFullScreen = () => {
-            // this.isFullscreenEnabled(!this.isFullscreenEnabled());
             const elem = this.getCanvas();
             if (elem.requestFullscreen) {
                 elem.requestFullscreen();

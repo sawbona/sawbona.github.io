@@ -8,14 +8,6 @@ class Point {
     constructor(x, y, z) {
         this.values = [x, y, z];
     }
-
-    // render(c) {
-    //     c.beginPath();
-    //     c.arc(this.values[0], this.values[1], 3, 0, Math.PI * 2);
-    //     c.lineWidth = 2;
-    //     c.strokeStyle = 'white';
-    //     c.stroke();
-    // }
 }
 
 class Cube {
