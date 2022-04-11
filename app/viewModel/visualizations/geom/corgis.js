@@ -29,18 +29,22 @@ export class Corgis {
              */
             this.fps = 60;
             this.setup(c, canvas.width, canvas.height);
-            clearInterval(lastInterval);
-            this.interval = setInterval(() => {
-                const currentDate = Date.now();
-                const diff = (currentDate - start);
+            this.startTime = undefined;
+            cancelAnimationFrame(lastInterval);
+            const loop = (timeStamp) => {
+                if (!this.startTime) {
+                    this.startTime = timeStamp;
+                }
+                const diff = (timeStamp - this.startTime);
                 try {
                     this.render(diff, c, canvas.width, canvas.height);
+                    requestAnimationFrame(loop);
                 } catch (e) {
                     console.error(e);
-                    clearInterval(this.interval);
+                    cancelAnimationFrame(lastInterval);
                 }
-            }, 1 * 1000 / this.fps);
-            lastInterval = this.interval;
+            };
+            lastInterval = requestAnimationFrame(loop);
         }
         this.onFullScreen = () => {
             const elem = this.getCanvas();
