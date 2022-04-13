@@ -24,6 +24,27 @@ class Cube {
     }
 }
 
+class Fucito {
+
+    constructor(params) {
+        const { w, h } = params
+        this.gif = new GIF();
+        this.ready = false;
+        this.position = Matrix.vector(0, h - 360, 0);
+
+        /* speed = width pixel / 20 minutes */
+        this.speed = (w + 360) / (20 * 60 * 1000);
+        this.gif.load('./resources/giphy-trans.gif');
+    }
+
+    render(params) {
+        const { t, c, w } = params;
+        if (!this.gif.loading) {
+            c.drawImage(this.gif.image, Limits.extendedMod(t * this.speed, -360, w), this.position.y);
+        }
+    }
+}
+
 export const model = new Corgis({
     setup(c, w, h) {
         c.fillStyle = "white";
@@ -63,6 +84,7 @@ export const model = new Corgis({
                 reset: false
             });
         }
+        this.fucito = new Fucito({ c, w, h });
     },
 
     render(t, c, w, h) {
@@ -83,9 +105,7 @@ export const model = new Corgis({
                 c.drawImage(s.img, x, s.position.y, 32 * s.scale, 32 * s.scale);
                 s.position.sum(s.delta);
             });
-
-            c.drawImage(this.gif.image, Limits.extendedMod(this.point.x, -360, w), this.point.y);
-            this.point.sum(this.delta);
+            this.fucito.render({ t, c, w, h });
         }
     }
 });
