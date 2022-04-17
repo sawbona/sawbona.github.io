@@ -33,6 +33,7 @@ export class Matrix {
         for (let i in this.values) {
             this.values[i] += escalar;
         }
+        return this;
     }
 
     sum(other) {
@@ -65,6 +66,7 @@ export class Matrix {
                 this.values[i] = this.values[i] * escalar;
             }
         }
+        return this;
     }
 
     get(i, j) {

@@ -32,7 +32,7 @@ class Fucito {
         this.ready = false;
         this.position = Matrix.vector(0, h - 360, 0);
 
-        /* speed = width pixel / 20 minutes */
+        /* speed = width in pixels / 20 minutes */
         this.speed = (w + 360) / (20 * 60 * 1000);
         this.gif.load('./resources/giphy-trans.gif');
     }
@@ -40,7 +40,8 @@ class Fucito {
     render(params) {
         const { t, c, w } = params;
         if (!this.gif.loading) {
-            c.drawImage(this.gif.image, Limits.extendedMod(t * this.speed, -360, w), this.position.y);
+            let x = t * this.speed;
+            c.drawImage(this.gif.image, Limits.extendedMod(x, -360, w), this.position.y);
         }
     }
 }
@@ -72,15 +73,16 @@ export const model = new Corgis({
         this.point = Matrix.vector(0, 0, 0);
         this.delta = new Matrix([0.1, 0, 0]);
         this.point = this.point.sum(Matrix.vector(0, h - 360, 0));
-        this.initialStars = 10 + (Math.random() * 99);
+        this.initialStars = 50 + (Math.random() * 50);
         this.stars = [];
         for (let i = 0; i < this.initialStars; i++) {
             const r = Math.random();
+            let scale = 0.1 + (r * 0.9);
             this.stars.push({
                 img: this.img,
                 position: Matrix.vector(RandomUtils.range(0, w), RandomUtils.range(0, h - 200), 0),
-                delta: Matrix.vector(r * -0.05, 0, 0),
-                scale: 0.1 + (r * 0.9),
+                delta: Matrix.vector(Math.sqrt(scale) * -0.10, 0, 0),
+                scale,
                 reset: false
             });
         }
@@ -94,8 +96,8 @@ export const model = new Corgis({
                 if (s.reset) {
                     s.position.y = RandomUtils.range(0, h - 200);
                     const random = Math.random();
-                    s.delta = Matrix.vector(random * -0.05, 0, 0);
                     s.scale = 0.1 + (random * 0.9);
+                    s.delta = Matrix.vector(Math.sqrt(s.scale) * -0.10, 0, 0);
                     s.reset = false;
                 }
                 const x = Limits.extendedMod(s.position.x, -32, w);
