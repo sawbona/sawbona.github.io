@@ -1,8 +1,9 @@
-export class RandomUtils {
-    static range(lower, upper) {
+class Randoms {
+    range(lower, upper) {
         const diff = upper - lower;
         const rand = Math.random() * diff;
-        return lower + rand;
+        return Math.floor(lower + rand);
     }
 }
 
+export const randoms = new Randoms();

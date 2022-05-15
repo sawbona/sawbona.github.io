@@ -16,7 +16,8 @@ class Main {
      * @param {string} selector 
      */
     wire(selector = '.dropdown-item') {
-        const links = Array.from(document.querySelectorAll(selector)).filter(e => !e.getAttribute('data-bind'));
+        const links = Array.from(document.querySelectorAll(selector)).
+            filter(e => !e.getAttribute('data-bind'));
         links.forEach(element => {
             element.onclick = (e) => {
                 const moduleNameWithHash = e.target.getAttribute('href');

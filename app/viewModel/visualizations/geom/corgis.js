@@ -31,13 +31,20 @@ export class Corgis {
             this.setup(c, canvas.width, canvas.height);
             this.startTime = undefined;
             cancelAnimationFrame(lastInterval);
+            this.lastRender = null;
+            
             const loop = (timeStamp) => {
-                if (!this.startTime) {
-                    this.startTime = timeStamp;
-                }
-                const diff = (timeStamp - this.startTime);
                 try {
-                    this.render(diff, c, canvas.width, canvas.height);
+                    if (!this.startTime) {
+                        this.startTime = timeStamp;
+                    }
+                    if (!this.lastRender) {
+                        this.lastRender = timeStamp;
+                    }
+                    const diff = (timeStamp - this.startTime);
+                    const dt = (timeStamp - this.lastRender);
+                    this.render(diff, c, canvas.width, canvas.height, dt);
+                    this.lastRender = timeStamp;
                     requestAnimationFrame(loop);
                 } catch (e) {
                     console.error(e);
@@ -70,8 +77,8 @@ export class Corgis {
         })
     }
 
-    getCanvas(canvasId) {
-        return document.getElementById(canvasId || 'circle-canvas');
+    getCanvas(canvasId = 'circle-canvas') {
+        return document.getElementById(canvasId);
     }
 
     setup(...params) {

@@ -1,7 +1,7 @@
 import { Corgis } from './geom/corgis.js';
 import { GIF } from './geom/gif.js';
 import { Matrix } from './geom/matrix.js';
-import { RandomUtils } from './geom/randomUtils.js'
+import { random } from './geom/randomUtils.js'
 import { Limits } from './geom/limits.js';
 
 class Point {
@@ -80,7 +80,7 @@ export const model = new Corgis({
             let scale = 0.1 + (r * 0.9);
             this.stars.push({
                 img: this.img,
-                position: Matrix.vector(RandomUtils.range(0, w), RandomUtils.range(0, h - 200), 0),
+                position: Matrix.vector(random.range(0, w), random.range(0, h - 200), 0),
                 delta: Matrix.vector(Math.sqrt(scale) * -0.10, 0, 0),
                 scale,
                 reset: false
@@ -94,7 +94,7 @@ export const model = new Corgis({
         if (this.imageReady.every(x => x)) {
             this.stars.forEach(s => {
                 if (s.reset) {
-                    s.position.y = RandomUtils.range(0, h - 200);
+                    s.position.y = random.range(0, h - 200);
                     const random = Math.random();
                     s.scale = 0.1 + (random * 0.9);
                     s.delta = Matrix.vector(Math.sqrt(s.scale) * -0.10, 0, 0);
