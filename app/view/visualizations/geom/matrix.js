@@ -17,12 +17,24 @@ export class MatrixBase {
         return this.values[0];
     }
 
+    set x(value) {
+        this.values[0] = value;
+    }
+
     get y() {
         return this.values[1];
     }
 
+    set y(value) {
+        this.values[1] = value;
+    }
+
     get z() {
         return this.values[2];
+    }
+
+    set z(value) {
+        this.values[2] = value;
     }
 
     get(i, j) {
@@ -86,10 +98,6 @@ export class Matrix extends MatrixBase {
 
     static vector(...values) {
         return new Matrix(values);
-    }
-
-    set y(value) {
-        this.values[1] = value;
     }
 
     sumEscalar(escalar) {

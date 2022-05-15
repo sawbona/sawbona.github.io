@@ -46,7 +46,7 @@ class Main {
             viewModelScript = document.createElement('script');
             viewModelScript.setAttribute('id', viewModelScriptId);
             viewModelScript.setAttribute('type', 'module');
-            viewModelScript.setAttribute('src', `app/viewModel/${moduleName}.js?t=${Date.now()}`);
+            viewModelScript.setAttribute('src', `app/view/${moduleName}.js?t=${Date.now()}`);
             document.body.appendChild(viewModelScript);
         });
     }

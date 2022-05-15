@@ -1,5 +1,4 @@
 import { Corgis } from './geom/corgis.js'
-import { matrix } from './geom/geom.js';
 import { Matrix } from './geom/matrix.js';
 import { GIF } from './geom/gif.js'
 
@@ -75,8 +74,10 @@ export const model = new Corgis({
     },
 
     render(t, c, w, h) {
+        // console.log(`render, this.point.x = ${this.point.x}, ${this.point.}`);
         this.clear();
         if (this.gifReady) {
+            
             c.drawImage(this.gif.image, this.point.x % w, this.point.y);
             this.point.sum(this.delta);
         }
