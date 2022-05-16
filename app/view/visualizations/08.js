@@ -59,12 +59,16 @@ class GameRenderer {
 }
 
 class InputReader {
-    constructor() {
-
+    constructor(game) {
+        this.game = game;
+        document.addEventListener('keyup', (e) => {
+            console.log(`e.code = ${e.code}`);
+            if (e.code === "ArrowUp") {
+                this.game.changePlayerDirection(0, 1);
+            }
+        });
     }
-    
 }
-
 
 export const model = new Corgis({
     setup(c, w, h) {
@@ -83,6 +87,7 @@ export const model = new Corgis({
         this.game = new Game(gameConfig);
         this.game.addPlayer();
         this.gameRenderer = new GameRenderer(this.game);
+        this.inputReader = new InputReader(this.game);
     },
 
     render(t, c, w, h, dt) {

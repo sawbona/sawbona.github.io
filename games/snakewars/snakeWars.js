@@ -84,7 +84,7 @@ export class Game {
     }
 
     changePlayerDirection(i, direction) {
-
+        this.players[i].direction = MatrixBase.vector(1, 0);
     }
 
     addPlayer() {
