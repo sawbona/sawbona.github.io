@@ -3,7 +3,9 @@ import { MatrixBase } from '/matrix/matrix.js';
 import { randoms } from '/randoms/randoms.js';
 
 class BoardCell {
-    constructor() {
+    constructor(i, j) {
+        this.i = i;
+        this.j = j;
         this.hasFruit = false;
     }
 }
@@ -21,10 +23,8 @@ class Player {
         this.direction = direction;
         this.body = [];
         this.body.push(new PlayerBodyCell(0, 0));
-        this.body.push(new PlayerBodyCell(1, 0));
-        this.body.push(new PlayerBodyCell(2, 0));
         this.lastUpdate = Date.now();
-        this.speed = 1000 / 1;
+        this.speed = 1000 / 5;
         const updateLoop = () => {
             try {
                 const now = Date.now();
@@ -45,33 +45,31 @@ class Player {
             this.body[i].y = this.body[i + 1].y;
         }
         const last = this.body[this.body.length - 1];
-        last.x += this.direction.x;
-        last.y += this.direction.y;
-    }
-
-    render({ t, c, w, h, dt, cellWidth }) {
-        c.save();
-        c.fillStyle = 'white';
-        c.strokeStyle = 'white';
-        this.body.forEach(b => {
-            c.fillRect(b.x * cellWidth, b.y * cellWidth, cellWidth, cellWidth);
-        });
-        c.restore();
+        if (last.x + this.direction.x >= this.board.size.m) {
+            last.x = 0;
+        } else {
+            last.x += this.direction.x;
+        }
+        if (last.y + this.direction.y >= this.board.size.n) {
+            last.y = 0;
+        } else {
+            last.y += this.direction.y;
+        }
     }
 }
 
 class Board {
-    constructor() {
-        this.size = { n: 50, m: 50 };
+    constructor(gameConfig) {
+        const { boardConfig: { n, m } } = gameConfig;
+        this.size = { n, m };
         this.cells = [];
         for (let i = 0; i < this.size.n; i++) {
             for (let j = 0; j < this.size.m; j++) {
-                this.cells.push(new BoardCell());
+                this.cells.push(new BoardCell(i, j));
             }
         }
         const random = randoms.range(0, this.size.n * this.size.m);
         this.cells[random].hasFruit = true;
-
     }
 
     getCell(i, j) {
@@ -80,13 +78,17 @@ class Board {
 }
 
 export class Game {
-    constructor() {
-        this.board = new Board();
+    constructor(gameConfig) {
+        this.board = new Board(gameConfig);
         this.players = [];
     }
 
+    changePlayerDirection(i, direction) {
+
+    }
+
     addPlayer() {
-        this.players.push(new Player(MatrixBase.vector(1, 0), this.board));
+        this.players.push(new Player(MatrixBase.vector(0, 1), this.board));
     }
 
 }
