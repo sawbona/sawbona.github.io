@@ -77,6 +77,13 @@ class Board {
     }
 }
 
+export const DIRECTIONS = {
+    UP: MatrixBase.vector(0, -1),
+    RIGHT: MatrixBase.vector(1, 0),
+    DOWN: MatrixBase.vector(0, 1),
+    LEFT: MatrixBase.vector(-1, 0),
+};
+
 export class Game {
     constructor(gameConfig) {
         this.board = new Board(gameConfig);
@@ -84,7 +91,7 @@ export class Game {
     }
 
     changePlayerDirection(i, direction) {
-        this.players[i].direction = MatrixBase.vector(1, 0);
+        this.players[i].direction = direction;
     }
 
     addPlayer() {

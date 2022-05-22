@@ -1,5 +1,5 @@
 import { randoms } from '../../../../randoms/randoms.js';
-import { Game } from '../../../games/snakewars/snakeWars.js';
+import { Game, DIRECTIONS } from '../../../games/snakewars/snakeWars.js';
 import { Corgis } from './geom/corgis.js';
 
 class GameRenderer {
@@ -58,13 +58,34 @@ class GameRenderer {
     }
 }
 
-class InputReader {
+function getDirectionFromCode(code) {
+    let direction = null;
+    switch (code) {
+        case "ArrowUp":
+            direction = DIRECTIONS.UP;
+            break;
+        case "ArrowRight":
+            direction = DIRECTIONS.RIGHT;
+            break;
+        case "ArrowDown":
+            direction = DIRECTIONS.DOWN;
+            break;
+        case "ArrowLeft":
+            direction = DIRECTIONS.LEFT;
+            break;
+        default:
+            break;
+    }
+    return direction;
+}
+
+class KeyboardInputReader {
     constructor(game) {
         this.game = game;
-        document.addEventListener('keyup', (e) => {
-            console.log(`e.code = ${e.code}`);
-            if (e.code === "ArrowUp") {
-                this.game.changePlayerDirection(0, 1);
+        document.addEventListener('keydown', (e) => {
+            const direction = getDirectionFromCode(e.code);
+            if (direction !== null) {
+                this.game.changePlayerDirection(0, direction);
             }
         });
     }
@@ -87,7 +108,7 @@ export const model = new Corgis({
         this.game = new Game(gameConfig);
         this.game.addPlayer();
         this.gameRenderer = new GameRenderer(this.game);
-        this.inputReader = new InputReader(this.game);
+        this.inputReader = new KeyboardInputReader(this.game);
     },
 
     render(t, c, w, h, dt) {
