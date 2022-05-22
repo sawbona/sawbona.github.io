@@ -1,7 +1,12 @@
-.j-hidden{
+.j-hidden {
     opacity: 0;
 }
 
 #circle-canvas {
-    cursor:none;
+    cursor: none;
+}
+
+.blog-entry {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
